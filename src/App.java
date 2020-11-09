@@ -3,34 +3,51 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class App {
+    static List<Note> notes = new ArrayList<Note>();
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Start to add new notes for your notebook");
-        System.out.println("*****************");
-        List<Note> notes = new ArrayList<Note>();
 
         while (true){
+            System.out.println("------------------");
             System.out.print("Add (a), print (p), remove (r), seach (s) or stop (enter): ");
             String command = scanner.nextLine();
 
             if (command.equals("a") || command.equals("A")){
-                System.out.println("Label: ");
-                String label = scanner.nextLine();
-                System.out.println("Text: ");
-                String text = scanner.nextLine();
-                notes.add(new Note(label, text));
+                addNote();
             } else if (command.equals("p") || command.equals("P")){
-                for (Note note : notes){
-                    System.out.println(note.printNote());
-                }
+                printNotes();
             } else if (command.equals("r") || command.equals("R")){
-                break; 
+                removeNote();
             } else if (command.equals("s") || command.equals("S")){
-                break;
+                searchNote();
             } else if (command.equals("")){
                 break;
             }
         }
+    }
+    public static void addNote(){
+        System.out.println("Label: ");
+        String label = scanner.nextLine();
+        System.out.println("Text: ");
+        String text = scanner.nextLine();
+        notes.add(new Note(label, text));
+    }
+
+    public static void printNotes(){
+        for (Note note : notes){
+            System.out.println(note.printNote());
+            System.out.println(" ");
+        }
+    }
+
+    public static void removeNote(){
+        //remove note with label
+    }
+
+    public static void searchNote(){
+        //searc note with label
     }
 }
 
