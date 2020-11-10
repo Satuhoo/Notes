@@ -10,23 +10,32 @@ public class App {
         System.out.println("Start to add new notes for your notebook");
 
         while (true){
+            System.out.println(" ");
             System.out.println("------------------");
-            System.out.print("Add (a), print (p), remove (r), seach (s) or stop (enter): ");
+            System.out.println("A: Add note \nP: Print notes \nR: Remove note \nS: Search note \nQ: Quit: ");
             String command = scanner.nextLine();
 
-            if (command.equals("a") || command.equals("A")){
-                addNote();
-            } else if (command.equals("p") || command.equals("P")){
-                printNotes();
-            } else if (command.equals("r") || command.equals("R")){
-                removeNote();
-            } else if (command.equals("s") || command.equals("S")){
-                searchNote();
-            } else if (command.equals("")){
+            if (command.equals("Q") || command.equals("q")){
                 break;
+            }
+
+            switch (command){
+                case "A": case "a":
+                    addNote();
+                    break;
+                case "P": case "p":
+                    printNotes();
+                    break;
+                case "R": case "r":
+                    removeNote();
+                    break;
+                case "S": case "s":
+                    searchNote();
+                    break;
             }
         }
     }
+
     public static void addNote(){
         System.out.println("Label: ");
         String label = scanner.nextLine();
@@ -37,29 +46,42 @@ public class App {
 
     public static void printNotes(){
         for (Note note : notes){
-            System.out.println(note.printNote());
             System.out.println(" ");
+            System.out.println(note.printNote());
         }
     }
 
     public static void removeNote(){
         System.out.println("Remove with label: ");
         String label = scanner.nextLine();
+        Note remove = null;
         for (Note note: notes){
             if(label.equals(note.getLabel())){
-                notes.remove(note);
-                System.out.println("Removed succesfully");
+                remove = note;
             }
+        }
+        if (remove != null){
+            notes.remove(remove);
+            System.out.println("Removed succesfully");
+        } else {
+            System.out.println("Not found");
         }
     }
 
     public static void searchNote(){
         System.out.println("Search with label: ");
         String label = scanner.nextLine();
+        String print = null;
         for (Note note: notes){
             if(label.equals(note.getLabel())){
-                System.out.println(note.printNote());
+                print = note.printNote();
             }
+        }
+        if (print != null){
+            System.out.println(" ");
+            System.out.println(print);
+        } else {
+            System.out.println("Not found");
         }
     }
 }
