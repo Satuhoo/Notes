@@ -43,11 +43,24 @@ public class App {
     }
 
     public static void removeNote(){
-        //remove note with label
+        System.out.println("Remove with label: ");
+        String label = scanner.nextLine();
+        for (Note note: notes){
+            if(label.equals(note.getLabel())){
+                notes.remove(note);
+                System.out.println("Removed succesfully");
+            }
+        }
     }
 
     public static void searchNote(){
-        //searc note with label
+        System.out.println("Search with label: ");
+        String label = scanner.nextLine();
+        for (Note note: notes){
+            if(label.equals(note.getLabel())){
+                System.out.println(note.printNote());
+            }
+        }
     }
 }
 
@@ -64,5 +77,9 @@ class Note {
     public String printNote(){
         String note = "NOTE: " + label + "\n      " + text;
         return note;
+    }
+
+    public String getLabel(){
+        return label;
     }
 }
